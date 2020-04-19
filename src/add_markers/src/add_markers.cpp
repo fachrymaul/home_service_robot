@@ -1,5 +1,11 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
+#include <nav_msgs/Odometry.h>
+
+void odom_callback(const nav_msgs::Odometry::ConstPtr& msg)
+{
+
+}
 
 int main( int argc, char** argv )
 {
@@ -8,6 +14,7 @@ int main( int argc, char** argv )
   ros::Rate r(1);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
+  ros::Subscriber odom_sub = n.subscribe("odom", 1000, odom_callback);
   // Set our initial shape type to be a cube
   uint32_t shape = visualization_msgs::Marker::CUBE;
 
@@ -63,7 +70,7 @@ int main( int argc, char** argv )
 
     marker.action = visualization_msgs::Marker::ADD;
 
-    marker.pose.position.x = -3;
+    marker.pose.position.x = -2;
 
     ROS_INFO("second marker");
 
